@@ -52,6 +52,16 @@ dependencies {
   testCompile("com.github.mvysny.dynatest:dynatest-engine:0.15")
   // heroku app runner
   staging("com.github.jsimone:webapp-runner-main:9.0.17.0")
+
+  compile("org.sql2o:sql2o:1.5.4")
+  compile("com.jolbox:bonecp:0.8.0.RELEASE")
+
+
+  compile("org.cups4j:cups4j:0.7.1")
+  compile("org.glassfish.jersey.core:jersey-client:2.27")
+  compile("org.glassfish.jersey.media:jersey-media-multipart:2.27")
+  compile("org.glassfish.jersey.inject:jersey-hk2:2.27")
+  compile("org.imgscalr:imgscalr-lib:4.2")
 }
 
 tasks.withType<KotlinCompile> {
