@@ -1,4 +1,4 @@
-package br.com.pintos.recebimento_gtin.viewmodel
+package br.com.pintos.recebimento_gtin.view
 
 import com.vaadin.flow.component.applayout.AbstractAppRouterLayout
 import com.vaadin.flow.component.applayout.AppLayout

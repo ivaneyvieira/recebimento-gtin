@@ -1,4 +1,4 @@
-package br.com.pintos.recebimento_gtin.viewmodel
+package br.com.pintos.recebimento_gtin.view
 
 import com.vaadin.flow.component.dependency.HtmlImport
 import com.vaadin.flow.component.login.LoginI18n
