@@ -11,7 +11,7 @@ import com.vaadin.flow.component.page.Viewport
 @Viewport("Recebimento")
 class MainView: AbstractAppRouterLayout() {
   override fun configure(appLayout: AppLayout, menu: AppLayoutMenu) {
-    appLayout.setBranding(Span("Vaadin Demo Bakery App"))
+    appLayout.setBranding(Span("Pintos"))
     setMenuItem(menu, AppLayoutMenuItem(VaadinIcon.EDIT.create(), "Recebimento", ""))
   }
 
