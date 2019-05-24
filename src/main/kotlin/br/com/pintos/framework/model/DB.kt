@@ -1,4 +1,4 @@
-package br.com.pintos.framework.utils
+package br.com.pintos.framework.model
 
 import java.io.File
 import java.io.FileReader

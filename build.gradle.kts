@@ -53,6 +53,7 @@ dependencies {
   // heroku app runner
   staging("com.github.jsimone:webapp-runner-main:9.0.17.0")
 
+  compile("mysql:mysql-connector-java:5.1.47")
   compile("org.sql2o:sql2o:1.5.4")
   compile("com.jolbox:bonecp:0.8.0.RELEASE")
 
