@@ -2,6 +2,7 @@ package br.com.pintos.recebimento_gtin.model
 
 import br.com.pintos.framework.model.QueryDB
 import br.com.pintos.framework.model.DB
+import br.com.pintos.framework.utils.lpad
 
 class QuerySaci: QueryDB(driver, url, username, password) {
   fun findUsuarios(): List<LoginUser> {
@@ -16,6 +17,24 @@ class QuerySaci: QueryDB(driver, url, username, password) {
     return query(sql) {q ->
       q.addParameter("nfekey", nfeKey)
         .executeAndFetch(NotaEntrada::class.java)
+    }
+  }
+
+  fun findProdutoNota(invno: Int): List<Produto> {
+    val sql = "/sql/produtosNota.sql"
+    return query(sql) {q ->
+      q.addParameter("invno", invno)
+        .executeAndFetch(Produto::class.java)
+    }
+  }
+
+  fun salvaProduto(codigo: String, grade: String, gtin: String) {
+    val sql = "/sql/salvaProduto.sql"
+    query(sql) {q ->
+      q.addParameter("prdno", codigo.lpad(16, " "))
+        .addParameter("grade", grade)
+        .addParameter("gtin", gtin)
+        .executeUpdate()
     }
   }
 
