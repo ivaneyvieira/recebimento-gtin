@@ -1,7 +1,7 @@
 package br.com.pintos.recebimento_gtin.model
 
-import br.com.pintos.framework.model.QueryDB
 import br.com.pintos.framework.model.DB
+import br.com.pintos.framework.model.QueryDB
 import br.com.pintos.framework.utils.lpad
 
 class QuerySaci: QueryDB(driver, url, username, password) {
@@ -35,6 +35,14 @@ class QuerySaci: QueryDB(driver, url, username, password) {
         .addParameter("grade", grade)
         .addParameter("gtin", gtin)
         .executeUpdate()
+    }
+  }
+
+  fun gtinJaCadastrado(codigo: String, grade: String, gtin: String): Boolean {
+    val sql = "/sql/gtinJaCadastrado.sql"
+    return query(sql) {q ->
+      q.addParameter("prdno", codigo.lpad(16, " ")).addParameter("grade", grade).addParameter("gtin",
+                                                                                              gtin).executeScalar(Int::class.java) > 0
     }
   }
 

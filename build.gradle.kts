@@ -20,6 +20,7 @@ defaultTasks("clean", "build")
 
 repositories {
   jcenter()
+  maven(url = "http://maven.vaadin.com/vaadin-addons")
 }
 
 gretty {
@@ -57,12 +58,14 @@ dependencies {
   compile("org.sql2o:sql2o:1.5.4")
   compile("com.jolbox:bonecp:0.8.0.RELEASE")
 
-
   compile("org.cups4j:cups4j:0.7.1")
   compile("org.glassfish.jersey.core:jersey-client:2.27")
   compile("org.glassfish.jersey.media:jersey-media-multipart:2.27")
   compile("org.glassfish.jersey.inject:jersey-hk2:2.27")
   compile("org.imgscalr:imgscalr-lib:4.2")
+
+  compile("com.github.appreciated:card:0.9.4")
+  compile("org.claspina:confirm-dialog:1.0.0")
 }
 
 tasks.withType<KotlinCompile> {

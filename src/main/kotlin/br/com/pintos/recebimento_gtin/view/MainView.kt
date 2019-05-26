@@ -9,8 +9,12 @@ import com.vaadin.flow.component.applayout.AppLayoutMenuItem
 import com.vaadin.flow.component.html.Span
 import com.vaadin.flow.component.icon.VaadinIcon
 import com.vaadin.flow.component.page.Viewport
+import com.vaadin.flow.server.PWA
+import com.vaadin.flow.server.PwaConfiguration
 
-@Viewport("Recebimento")
+//@Theme(value = Material::class, variant = Material.LIGHT)
+@PWA(name = "Recebimento GTIN", shortName = "GTIN", display = "fullscreen")
+@Viewport("width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes")
 class MainView: AbstractAppRouterLayout() {
   init {
     SecurityUtils.configDB()
