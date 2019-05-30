@@ -14,16 +14,16 @@ import com.vaadin.flow.server.PwaConfiguration
 import java.awt.SystemColor.info
 import com.vaadin.flow.server.ServiceInitEvent
 import com.vaadin.flow.server.VaadinServiceInitListener
-
-
+import javax.servlet.ServletContextEvent
+import javax.servlet.ServletContextListener
+import javax.servlet.annotation.WebListener
 
 //@Theme(value = Material::class, variant = Material.LIGHT)
 @PWA(name = "Recebimento GTIN", shortName = "GTIN", display = "fullscreen")
 @Viewport("width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes")
 class MainView: AbstractAppRouterLayout() {
   init {
-    if(!SecurityUtils.isUserLoggedIn())
-      UI.getCurrent().navigate("login")
+    if(!SecurityUtils.isUserLoggedIn()) UI.getCurrent().navigate("login")
   }
 
   override fun configure(appLayout: AppLayout, menu: AppLayoutMenu) {
@@ -32,7 +32,8 @@ class MainView: AbstractAppRouterLayout() {
     setMenuItem(menu, AppLayoutMenuItem(VaadinIcon.COG.create(), "Configuração", ""))
     setMenuItem(menu, AppLayoutMenuItem(VaadinIcon.OUT.create(), "Sair") {
       SecurityUtils.logout()
-      UI.getCurrent().navigate("login")
+      UI.getCurrent()
+        .navigate("login")
     })
   }
 
@@ -42,10 +43,12 @@ class MainView: AbstractAppRouterLayout() {
   }
 }
 
-class ServiceListener: VaadinServiceInitListener {
-  override fun serviceInit(event: ServiceInitEvent) {
-    event.source.addUIInitListener {initEvent ->
-      SecurityUtils.configDB()
-    }
+@WebListener
+class ServiceListener: ServletContextListener {
+  override fun contextInitialized(sce: ServletContextEvent?) {
+    SecurityUtils.configDB()
+  }
+
+  override fun contextDestroyed(sce: ServletContextEvent?) {
   }
 }
