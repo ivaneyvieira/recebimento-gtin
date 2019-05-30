@@ -10,10 +10,12 @@ class LoginViewModel {
 
   fun processLogin() {
     val user = usuarios.find {it.login == username && it.senha == password}
-    loginOk = user != null
+    SecurityUtils.user = user
+    loginOk = SecurityUtils.user != null
   }
 
   fun logout() {
-
+    SecurityUtils.user = null
+    loginOk = SecurityUtils.user != null
   }
 }

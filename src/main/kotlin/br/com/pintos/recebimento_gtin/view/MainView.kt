@@ -1,6 +1,7 @@
 package br.com.pintos.recebimento_gtin.view
 
 import br.com.pintos.recebimento_gtin.viewmodel.SecurityUtils
+import com.vaadin.flow.component.HasElement
 import com.vaadin.flow.component.UI
 import com.vaadin.flow.component.applayout.AbstractAppRouterLayout
 import com.vaadin.flow.component.applayout.AppLayout
@@ -9,31 +10,42 @@ import com.vaadin.flow.component.applayout.AppLayoutMenuItem
 import com.vaadin.flow.component.html.Span
 import com.vaadin.flow.component.icon.VaadinIcon
 import com.vaadin.flow.component.page.Viewport
+import com.vaadin.flow.router.PageTitle
 import com.vaadin.flow.server.PWA
 import com.vaadin.flow.server.PwaConfiguration
 import java.awt.SystemColor.info
 import com.vaadin.flow.server.ServiceInitEvent
 import com.vaadin.flow.server.VaadinServiceInitListener
+import com.vaadin.flow.theme.Theme
+import com.vaadin.flow.theme.material.Material
+import jdk.nashorn.internal.runtime.linker.Bootstrap
+import jdk.nashorn.internal.runtime.regexp.joni.Config.log
+import org.slf4j.LoggerFactory
 import javax.servlet.ServletContextEvent
 import javax.servlet.ServletContextListener
 import javax.servlet.annotation.WebListener
 
 //@Theme(value = Material::class, variant = Material.LIGHT)
 @PWA(name = "Recebimento GTIN", shortName = "GTIN", display = "fullscreen")
-@Viewport("width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes")
+@PageTitle("Recebimento GTIN")
+@Viewport("width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes")
+@Theme(Material::class)
 class MainView: AbstractAppRouterLayout() {
-  init {
-    if(!SecurityUtils.isUserLoggedIn()) UI.getCurrent().navigate("login")
-  }
-
   override fun configure(appLayout: AppLayout, menu: AppLayoutMenu) {
     appLayout.setBranding(Span("Pintos"))
-    setMenuItem(menu, AppLayoutMenuItem(VaadinIcon.EDIT.create(), "Recebimento", ""))
-    setMenuItem(menu, AppLayoutMenuItem(VaadinIcon.COG.create(), "Configuração", ""))
+    setMenuItem(menu, AppLayoutMenuItem(VaadinIcon.EDIT.create(), "Recebimento") {
+      UI.getCurrent()
+        .navigate(AssociacaoGtinView::class.java)
+    })
+    if(SecurityUtils.user?.isAdmin == true) setMenuItem(menu,
+                                                        AppLayoutMenuItem(VaadinIcon.COG.create(), "Configuração") {
+                                                          UI.getCurrent()
+                                                            .navigate(ConfigView::class.java)
+                                                        })
     setMenuItem(menu, AppLayoutMenuItem(VaadinIcon.OUT.create(), "Sair") {
       SecurityUtils.logout()
       UI.getCurrent()
-        .navigate("login")
+        .navigate(LoginView::class.java)
     })
   }
 
@@ -41,14 +53,32 @@ class MainView: AbstractAppRouterLayout() {
     menuItem.element.setAttribute("theme", "icon-on-top")
     menu.addMenuItem(menuItem)
   }
+
+  override fun beforeNavigate(route: String?, content: HasElement?) {
+    if(!SecurityUtils.isUserLoggedIn()) {
+      UI.getCurrent()
+        .navigate(LoginView::class.java)
+    }
+    else if(route == "") UI.getCurrent().navigate(AssociacaoGtinView::class.java)
+    else super.beforeNavigate(route, content)
+  }
 }
 
 @WebListener
 class ServiceListener: ServletContextListener {
   override fun contextInitialized(sce: ServletContextEvent?) {
+    log.info("Initializing Database")
     SecurityUtils.configDB()
   }
 
   override fun contextDestroyed(sce: ServletContextEvent?) {
+    log.info("Shutting down");
+    log.info("Destroying VaadinOnKotlin")
+    //VaadinOnKotlin.destroy()
+    log.info("Shutdown complete")
+  }
+
+  companion object {
+    private val log = LoggerFactory.getLogger(Bootstrap::class.java)
   }
 }
