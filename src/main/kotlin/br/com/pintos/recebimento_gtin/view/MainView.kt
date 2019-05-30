@@ -11,13 +11,17 @@ import com.vaadin.flow.component.icon.VaadinIcon
 import com.vaadin.flow.component.page.Viewport
 import com.vaadin.flow.server.PWA
 import com.vaadin.flow.server.PwaConfiguration
+import java.awt.SystemColor.info
+import com.vaadin.flow.server.ServiceInitEvent
+import com.vaadin.flow.server.VaadinServiceInitListener
+
+
 
 //@Theme(value = Material::class, variant = Material.LIGHT)
 @PWA(name = "Recebimento GTIN", shortName = "GTIN", display = "fullscreen")
 @Viewport("width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes")
 class MainView: AbstractAppRouterLayout() {
   init {
-    SecurityUtils.configDB()
     if(!SecurityUtils.isUserLoggedIn())
       UI.getCurrent().navigate("login")
   }
@@ -35,5 +39,13 @@ class MainView: AbstractAppRouterLayout() {
   private fun setMenuItem(menu: AppLayoutMenu, menuItem: AppLayoutMenuItem) {
     menuItem.element.setAttribute("theme", "icon-on-top")
     menu.addMenuItem(menuItem)
+  }
+}
+
+class ServiceListener: VaadinServiceInitListener {
+  override fun serviceInit(event: ServiceInitEvent) {
+    event.source.addUIInitListener {initEvent ->
+      SecurityUtils.configDB()
+    }
   }
 }
