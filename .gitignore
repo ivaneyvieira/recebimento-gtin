@@ -5,5 +5,7 @@ classes
 local.properties
 *.iml
 out
-gradle
+gradle*
+deploy.sh
+
 
