@@ -7,5 +7,3 @@ local.properties
 out
 gradle*
 deploy.sh
-
-
