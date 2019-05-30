@@ -17,6 +17,7 @@ class DB(banco: String) {
     private fun properties(): Properties? {
       val properties = Properties()
       val file = File(propertieFile)
+      println("Carregando configurações do arquivo: $propertieFile")
 
       properties.load(FileReader(file))
       return properties

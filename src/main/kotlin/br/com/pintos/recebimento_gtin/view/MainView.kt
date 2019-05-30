@@ -22,8 +22,6 @@ class MainView: AbstractAppRouterLayout() {
       UI.getCurrent().navigate("login")
   }
 
-
-
   override fun configure(appLayout: AppLayout, menu: AppLayoutMenu) {
     appLayout.setBranding(Span("Pintos"))
     setMenuItem(menu, AppLayoutMenuItem(VaadinIcon.EDIT.create(), "Recebimento", ""))
