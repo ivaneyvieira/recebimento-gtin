@@ -14,9 +14,7 @@ import com.vaadin.flow.router.BeforeEnterObserver
 import com.vaadin.flow.router.PageTitle
 import com.vaadin.flow.router.Route
 
-@Route("login")
-@PageTitle("Recebimento GTIN")
-@Viewport("width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes")
+@Route("login", layout = MainView::class)
 class LoginView: VerticalLayout(), BeforeEnterObserver {
   private val login = LoginOverlay()
   val model = LoginViewModel()
@@ -32,6 +30,11 @@ class LoginView: VerticalLayout(), BeforeEnterObserver {
     i18n.form.title = "Login"
     i18n.form.username = "Email"
     i18n.form.password = "Senha"
+    i18n.form.forgotPassword = "Esqueci minha senha"
+    i18n.errorMessage.title = "Usuário/senha inválidos"
+    i18n.errorMessage.message = "Confira seu usuário e senha e tente novamente."
+    //i18n.additionalInformation = "Caso necessite apresentar alguma informação extra para o usuário (como
+    // credenciais padrão), este é o lugar."
     login.setI18n(i18n)
     login.isForgotPasswordButtonVisible = false
     //login.action = "login"
@@ -39,6 +42,7 @@ class LoginView: VerticalLayout(), BeforeEnterObserver {
     login.addLoginListener {e ->
       model.username = e.username ?: ""
       model.password = e.password
+
       model.processLogin()
       if(model.loginOk) {
         login.close()
@@ -46,13 +50,13 @@ class LoginView: VerticalLayout(), BeforeEnterObserver {
       }
       else {
         login.isError = true
-        model.logout()
       }
     }
   }
 
   private fun navigateToMainPage() {
-    UI.getCurrent().navigate("")
+    UI.getCurrent()
+      .navigate(AssociacaoGtinView::class.java)
   }
 
   override fun beforeEnter(event: BeforeEnterEvent) {

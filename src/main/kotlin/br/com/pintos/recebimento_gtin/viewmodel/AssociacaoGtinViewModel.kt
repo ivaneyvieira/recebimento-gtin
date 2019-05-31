@@ -71,6 +71,10 @@ class AssociacaoGtinViewModel(val view: IView) {
       showErro("Produto inválido")
       update(false)
     }
+    else if(produto.gtin == "") {
+      produto.save()
+      update(true)
+    }
     else if(!produto.temGrade()) {
       showErro("Produto não tem grade")
       update(false)

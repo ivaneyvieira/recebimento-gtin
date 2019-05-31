@@ -12,6 +12,7 @@ object SecurityUtils {
   fun configDB(){
     val home = System.getenv("HOME")
     val fileName = System.getenv("EBEAN_PROPS") ?: "$home/ebean.saci.properties"
+    println("Salvando configurações $fileName")
     System.setProperty("ebean.props.file", fileName)
   }
 

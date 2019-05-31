@@ -17,7 +17,7 @@ class Produto(val codigo: String,
   }
 
   fun digitoValido(): Boolean {
-    return gtin.isValidBarCodeEAN()
+    return gtin.isValidBarCodeEAN() || gtin == ""
   }
 
   fun temGrade(): Boolean {

@@ -1,5 +1,4 @@
 select COUNT(*) as quant
-  from sqldados.prdbar
+  from prdbar
 where barcode48 = :gtin
-  and prdno <> :prdno
-  and grade <> :grade
+  and NOT (prdno = :prdno AND grade = :grade)

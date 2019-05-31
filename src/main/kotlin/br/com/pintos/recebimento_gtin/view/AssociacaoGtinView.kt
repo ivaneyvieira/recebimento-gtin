@@ -28,7 +28,7 @@ import com.vaadin.flow.data.value.ValueChangeMode
 import com.vaadin.flow.router.Route
 import org.claspina.confirmdialog.ConfirmDialog
 
-@Route("", layout = MainView::class)
+@Route("recebimento", layout = MainView::class)
 class AssociacaoGtinView: IView, VerticalLayout() {
   override fun showErro(msg: String) {
     ConfirmDialog.createError()

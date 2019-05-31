@@ -31,7 +31,7 @@ fi
 
 echo ${VERSAO} > ${ARQ_VERSAO}
 
-git.sh "deploy $VERSAO: $MSG_COMMIT"
+#git.sh "deploy $VERSAO: $MSG_COMMIT"
 
 gradle
 

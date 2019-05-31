@@ -15,6 +15,7 @@ class DB(banco: String) {
     private val propertieFile = System.getProperty("ebean.props.file")
 
     private fun properties(): Properties? {
+      println("Carregando configurações do arquivo: $propertieFile")
       val properties = Properties()
       val file = File(propertieFile)
 

@@ -48,7 +48,8 @@ fun String.mid(start: Int): String {
 
 fun String.isValidBarCodeEAN(): Boolean {
   val checkSum = "131313131313".map {it.toString().toInt()}
-  return if((this.length == 8 || this.length == 13) && this.matches("[0-9]".toRegex())) {
+
+  return if((this.length == 8 || this.length == 13) && this.matches("[0-9]+".toRegex())) {
     val digit = this[this.length - 1].toString().toInt()
     val ean = this.substring(0, this.length - 1)
       .map {it.toString().toInt()}
