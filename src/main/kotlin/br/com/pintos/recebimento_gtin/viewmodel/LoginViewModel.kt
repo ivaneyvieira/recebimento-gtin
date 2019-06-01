@@ -5,17 +5,21 @@ import br.com.pintos.recebimento_gtin.model.LoginUser
 class LoginViewModel {
   var username: String = ""
   var password: String = ""
-  var loginOk: Boolean = false
+  val loginOk
+    get() = SecurityUtils.isLogged
   private val usuarios = LoginUser.usuarios
 
   fun processLogin() {
     val user = usuarios.find {it.login == username && it.senha == password}
-    SecurityUtils.user = user
-    loginOk = SecurityUtils.user != null
+    if(user == null) logout()
+    else login(user)
+  }
+
+  fun login(user: LoginUser) {
+    SecurityUtils.login(user)
   }
 
   fun logout() {
-    SecurityUtils.user = null
-    loginOk = SecurityUtils.user != null
+    SecurityUtils.logout()
   }
 }

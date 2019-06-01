@@ -13,7 +13,7 @@ plugins {
 
 vaadin {
   version = "13.0.5"
-  setUnsupportedVersion(true)
+  this.setUnsupportedVersion(true)
 }
 
 defaultTasks("clean", "build")
@@ -37,8 +37,10 @@ tasks.withType<Test> {
 }
 val staging by configurations.creating
 
+
 dependencies {
-  compile(enforcedPlatform("com.vaadin:vaadin-bom:$vaadin10_version"))
+  //compile("com.vaadin:vaadin-bom:$vaadin10_version")
+  //compile("com.vaadin:vaadin-spring:$vaadin10_version")
   // Karibu-DSL dependency, includes Vaadin
   compile("com.github.mvysny.karibudsl:karibu-dsl-v10:$karibudsl_version")
   providedCompile("javax.servlet:javax.servlet-api:3.1.0")
@@ -66,6 +68,7 @@ dependencies {
 
   compile("com.github.appreciated:card:0.9.4")
   compile("org.claspina:confirm-dialog:1.0.0")
+  //compile("org.springframework.boot:spring-boot-starter-web:2.1.5.RELEASE")
 }
 
 tasks.withType<KotlinCompile> {

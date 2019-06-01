@@ -30,19 +30,7 @@ import org.claspina.confirmdialog.ConfirmDialog
 
 @Route("recebimento", layout = MainView::class)
 class AssociacaoGtinView: IView, VerticalLayout() {
-  override fun showErro(msg: String) {
-    ConfirmDialog.createError()
-      .withCaption("Erro")
-      .withMessage(msg)
-      .open()
-  }
-
-  override fun showAviso(msg: String) {
-    ConfirmDialog.createWarning()
-      .withCaption("Aviso")
-      .withMessage(msg)
-      .open()
-  }
+  val model = AssociacaoGtinViewModel(this)
 
   private var dadosNota: HorizontalLayout
   private var gridProdutos: Grid<Produto>
@@ -50,7 +38,6 @@ class AssociacaoGtinView: IView, VerticalLayout() {
   private lateinit var fornecedor: TextField
   private lateinit var numeroNota: TextField
   private lateinit var numeroInterno: TextField
-  val model = AssociacaoGtinViewModel(this)
   private lateinit var edtChave: TextField
 
   init {
@@ -93,7 +80,7 @@ class AssociacaoGtinView: IView, VerticalLayout() {
         addThemeVariants(LUMO_SMALL)
       }
     }
-    gridProdutos = grid<Produto> {
+    gridProdutos = grid {
       this.setSizeFull()
       isMultiSort = false
       addThemeVariants(LUMO_COMPACT, LUMO_COLUMN_BORDERS)
@@ -206,5 +193,19 @@ class AssociacaoGtinView: IView, VerticalLayout() {
       gridProdutos.setItems(emptyList())
       edtChave.focus()
     }
+  }
+
+  override fun showErro(msg: String) {
+    ConfirmDialog.createError()
+      .withCaption("Erro")
+      .withMessage(msg)
+      .open()
+  }
+
+  override fun showAviso(msg: String) {
+    ConfirmDialog.createWarning()
+      .withCaption("Aviso")
+      .withMessage(msg)
+      .open()
   }
 }

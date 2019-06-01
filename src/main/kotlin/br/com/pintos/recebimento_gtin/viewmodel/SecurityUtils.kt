@@ -5,15 +5,11 @@ import br.com.pintos.recebimento_gtin.model.LoginUser
 object SecurityUtils {
   var user: LoginUser? = null
 
-  fun isUserLoggedIn(): Boolean {
-    return user != null
-  }
+  val isLogged
+    get() = user != null
 
-  fun configDB(){
-    val home = System.getenv("HOME")
-    val fileName = System.getenv("EBEAN_PROPS") ?: "$home/ebean.saci.properties"
-    println("Salvando configurações $fileName")
-    System.setProperty("ebean.props.file", fileName)
+  fun login(user: LoginUser) {
+    this.user = user
   }
 
   fun logout() {

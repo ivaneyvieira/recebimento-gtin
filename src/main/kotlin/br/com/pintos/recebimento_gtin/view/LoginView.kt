@@ -1,23 +1,18 @@
 package br.com.pintos.recebimento_gtin.view
 
 import br.com.pintos.recebimento_gtin.viewmodel.LoginViewModel
-import br.com.pintos.recebimento_gtin.viewmodel.SecurityUtils
-import com.github.mvysny.karibudsl.v10.navigateToView
 import com.vaadin.flow.component.UI
-import com.vaadin.flow.component.dependency.HtmlImport
 import com.vaadin.flow.component.login.LoginI18n
 import com.vaadin.flow.component.login.LoginOverlay
 import com.vaadin.flow.component.orderedlayout.VerticalLayout
-import com.vaadin.flow.component.page.Viewport
 import com.vaadin.flow.router.BeforeEnterEvent
 import com.vaadin.flow.router.BeforeEnterObserver
-import com.vaadin.flow.router.PageTitle
 import com.vaadin.flow.router.Route
 
-@Route("login", layout = MainView::class)
+@Route("login")
 class LoginView: VerticalLayout(), BeforeEnterObserver {
-  private val login = LoginOverlay()
   val model = LoginViewModel()
+  private val login = LoginOverlay()
 
   init {
     val i18n = LoginI18n.createDefault()
@@ -60,7 +55,7 @@ class LoginView: VerticalLayout(), BeforeEnterObserver {
   }
 
   override fun beforeEnter(event: BeforeEnterEvent) {
-    if(SecurityUtils.isUserLoggedIn()) {
+    if(model.loginOk) {
       UI.getCurrent()
         .page.history.replaceState(null, "")
       event.rerouteTo(AssociacaoGtinView::class.java)

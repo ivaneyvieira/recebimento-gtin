@@ -11,27 +11,21 @@ import com.vaadin.flow.component.html.Span
 import com.vaadin.flow.component.icon.VaadinIcon
 import com.vaadin.flow.component.page.Viewport
 import com.vaadin.flow.router.PageTitle
-import com.vaadin.flow.server.PWA
-import com.vaadin.flow.server.PwaConfiguration
-import java.awt.SystemColor.info
-import com.vaadin.flow.server.ServiceInitEvent
-import com.vaadin.flow.server.VaadinServiceInitListener
 import com.vaadin.flow.theme.Theme
-import com.vaadin.flow.theme.material.Material
+import com.vaadin.flow.theme.lumo.Lumo
 import jdk.nashorn.internal.runtime.linker.Bootstrap
-import jdk.nashorn.internal.runtime.regexp.joni.Config.log
 import org.slf4j.LoggerFactory
 import javax.servlet.ServletContextEvent
 import javax.servlet.ServletContextListener
 import javax.servlet.annotation.WebListener
 
 //@Theme(value = Material::class, variant = Material.LIGHT)
-@PWA(name = "Recebimento GTIN", shortName = "GTIN", display = "fullscreen")
+//@PWA(name = "Recebimento GTIN", shortName = "GTIN", display = "fullscreen")
 @PageTitle("Recebimento GTIN")
 @Viewport("width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes")
-@Theme(Material::class)
+@Theme(Lumo::class)
 class MainView: AbstractAppRouterLayout() {
-  override fun configure(appLayout: AppLayout, menu: AppLayoutMenu) {
+   override fun configure(appLayout: AppLayout, menu: AppLayoutMenu) {
     appLayout.setBranding(Span("Pintos"))
     setMenuItem(menu, AppLayoutMenuItem(VaadinIcon.EDIT.create(), "Recebimento") {
       UI.getCurrent()
@@ -55,7 +49,7 @@ class MainView: AbstractAppRouterLayout() {
   }
 
   override fun beforeNavigate(route: String?, content: HasElement?) {
-    if(!SecurityUtils.isUserLoggedIn()) {
+    if(!SecurityUtils.isLogged) {
       UI.getCurrent()
         .navigate(LoginView::class.java)
     }
@@ -66,9 +60,16 @@ class MainView: AbstractAppRouterLayout() {
 
 @WebListener
 class ServiceListener: ServletContextListener {
+  fun configDB() {
+    val home = System.getenv("HOME")
+    val fileName = System.getenv("EBEAN_PROPS") ?: "$home/ebean.saci.properties"
+    println("Salvando configurações $fileName")
+    System.setProperty("ebean.props.file", fileName)
+  }
+
   override fun contextInitialized(sce: ServletContextEvent?) {
     log.info("Initializing Database")
-    SecurityUtils.configDB()
+    configDB()
   }
 
   override fun contextDestroyed(sce: ServletContextEvent?) {
