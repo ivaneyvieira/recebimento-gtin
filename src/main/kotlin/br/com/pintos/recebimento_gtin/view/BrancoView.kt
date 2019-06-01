@@ -5,7 +5,7 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout
 import com.vaadin.flow.router.Route
 
 @Route("")
-class BrancoView : VerticalLayout(){
+class BrancoView: VerticalLayout() {
   init {
     UI.getCurrent()
       .navigate(AssociacaoGtinView::class.java)

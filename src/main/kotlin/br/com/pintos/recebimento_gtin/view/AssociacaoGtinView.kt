@@ -3,6 +3,7 @@ package br.com.pintos.recebimento_gtin.view
 import br.com.pintos.framework.utils.format
 import br.com.pintos.framework.utils.localDate
 import br.com.pintos.recebimento_gtin.model.Produto
+import br.com.pintos.recebimento_gtin.view.AssociacaoGtinView.Companion.ROUTE
 import br.com.pintos.recebimento_gtin.viewmodel.AssociacaoGtinViewModel
 import br.com.pintos.recebimento_gtin.viewmodel.IView
 import com.github.mvysny.karibudsl.v10.KeyShortcut
@@ -16,6 +17,7 @@ import com.github.mvysny.karibudsl.v10.textField
 import com.vaadin.flow.component.Key
 import com.vaadin.flow.component.Key.ENTER
 import com.vaadin.flow.component.Key.F2
+import com.vaadin.flow.component.UI
 import com.vaadin.flow.component.grid.Grid
 import com.vaadin.flow.component.grid.GridVariant.LUMO_COLUMN_BORDERS
 import com.vaadin.flow.component.grid.GridVariant.LUMO_COMPACT
@@ -28,10 +30,14 @@ import com.vaadin.flow.data.value.ValueChangeMode
 import com.vaadin.flow.router.Route
 import org.claspina.confirmdialog.ConfirmDialog
 
-@Route("recebimento", layout = MainView::class)
+@Route(ROUTE, layout = MainView::class)
 class AssociacaoGtinView: IView, VerticalLayout() {
-  val model = AssociacaoGtinViewModel(this)
+  companion object {
+    const val ROUTE = "recebimento"
+  }
 
+  val model: AssociacaoGtinViewModel = UI.getCurrent()
+    .create {AssociacaoGtinViewModel(this)}
   private var dadosNota: HorizontalLayout
   private var gridProdutos: Grid<Produto>
   private lateinit var dataNota: TextField
@@ -155,8 +161,8 @@ class AssociacaoGtinView: IView, VerticalLayout() {
       binder.addValueChangeListener {e ->
         val produto = binder.bean
         model.saveProduto(produto) {sucesso ->
-          if(!sucesso){
-            produto.gtin =""
+          if(!sucesso) {
+            produto.gtin = ""
             this.editor.editItem(produto)
             field.focus()
           }

@@ -7,7 +7,7 @@ import com.vaadin.flow.component.applayout.AbstractAppRouterLayout
 import com.vaadin.flow.component.applayout.AppLayout
 import com.vaadin.flow.component.applayout.AppLayoutMenu
 import com.vaadin.flow.component.applayout.AppLayoutMenuItem
-import com.vaadin.flow.component.html.Span
+import com.vaadin.flow.component.html.H3
 import com.vaadin.flow.component.icon.VaadinIcon
 import com.vaadin.flow.component.page.Viewport
 import com.vaadin.flow.router.PageTitle
@@ -25,21 +25,17 @@ import javax.servlet.annotation.WebListener
 @Viewport("width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes")
 @Theme(Lumo::class)
 class MainView: AbstractAppRouterLayout() {
-   override fun configure(appLayout: AppLayout, menu: AppLayoutMenu) {
-    appLayout.setBranding(Span("Pintos"))
-    setMenuItem(menu, AppLayoutMenuItem(VaadinIcon.EDIT.create(), "Recebimento") {
-      UI.getCurrent()
-        .navigate(AssociacaoGtinView::class.java)
-    })
+  override fun configure(appLayout: AppLayout, menu: AppLayoutMenu) {
+    appLayout.setBranding(H3("Pintos LTDA"))
+    setMenuItem(menu, AppLayoutMenuItem(VaadinIcon.EDIT.create(), "Recebimento", AssociacaoGtinView.ROUTE))
     if(SecurityUtils.user?.isAdmin == true) setMenuItem(menu,
-                                                        AppLayoutMenuItem(VaadinIcon.COG.create(), "Configuração") {
-                                                          UI.getCurrent()
-                                                            .navigate(ConfigView::class.java)
-                                                        })
+                                                        AppLayoutMenuItem(VaadinIcon.COG.create(),
+                                                                          "Configuração",
+                                                                          ConfigView.ROUTE))
     setMenuItem(menu, AppLayoutMenuItem(VaadinIcon.OUT.create(), "Sair") {
       SecurityUtils.logout()
       UI.getCurrent()
-        .navigate(LoginView::class.java)
+        .navigate(LoginView.ROUTE)
     })
   }
 
@@ -51,9 +47,9 @@ class MainView: AbstractAppRouterLayout() {
   override fun beforeNavigate(route: String?, content: HasElement?) {
     if(!SecurityUtils.isLogged) {
       UI.getCurrent()
-        .navigate(LoginView::class.java)
+        .navigate(LoginView.ROUTE)
     }
-    else if(route == "") UI.getCurrent().navigate(AssociacaoGtinView::class.java)
+    else if(route == "") UI.getCurrent().navigate(AssociacaoGtinView.ROUTE)
     else super.beforeNavigate(route, content)
   }
 }
@@ -73,7 +69,7 @@ class ServiceListener: ServletContextListener {
   }
 
   override fun contextDestroyed(sce: ServletContextEvent?) {
-    log.info("Shutting down");
+    log.info("Shutting down")
     log.info("Destroying VaadinOnKotlin")
     //VaadinOnKotlin.destroy()
     log.info("Shutdown complete")

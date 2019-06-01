@@ -4,7 +4,6 @@ import br.com.pintos.recebimento_gtin.model.LoginUser
 
 object SecurityUtils {
   var user: LoginUser? = null
-
   val isLogged
     get() = user != null
 

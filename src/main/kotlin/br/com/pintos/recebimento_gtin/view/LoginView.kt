@@ -1,5 +1,6 @@
 package br.com.pintos.recebimento_gtin.view
 
+import br.com.pintos.recebimento_gtin.view.LoginView.Companion.ROUTE
 import br.com.pintos.recebimento_gtin.viewmodel.LoginViewModel
 import com.vaadin.flow.component.UI
 import com.vaadin.flow.component.login.LoginI18n
@@ -9,10 +10,14 @@ import com.vaadin.flow.router.BeforeEnterEvent
 import com.vaadin.flow.router.BeforeEnterObserver
 import com.vaadin.flow.router.Route
 
-@Route("login")
-@
+@Route(ROUTE)
 class LoginView: VerticalLayout(), BeforeEnterObserver {
-  val model = LoginViewModel()
+  companion object {
+    const val ROUTE = "login"
+  }
+
+  val model: LoginViewModel = UI.getCurrent()
+    .create {LoginViewModel()}
   private val login = LoginOverlay()
 
   init {
@@ -31,35 +36,38 @@ class LoginView: VerticalLayout(), BeforeEnterObserver {
     i18n.errorMessage.message = "Confira seu usuário e senha e tente novamente."
     //i18n.additionalInformation = "Caso necessite apresentar alguma informação extra para o usuário (como
     // credenciais padrão), este é o lugar."
-    login.setI18n(i18n)
-    login.isForgotPasswordButtonVisible = false
-    //login.action = "login"
-    login.isOpened = true
-    login.addLoginListener {e ->
-      model.username = e.username ?: ""
-      model.password = e.password
+    if(model.loginOk) login.close()
+    else {
+      login.setI18n(i18n)
+      login.isForgotPasswordButtonVisible = false
+      //login.action = "login"
+      login.isOpened = true
+      login.addLoginListener {e ->
+        model.username = e.username ?: ""
+        model.password = e.password
 
-      model.processLogin()
-      if(model.loginOk) {
-        login.close()
-        navigateToMainPage()
-      }
-      else {
-        login.isError = true
+        model.processLogin()
+        if(model.loginOk) {
+          login.close()
+          navigateToMainPage()
+        }
+        else {
+          login.isError = true
+        }
       }
     }
   }
 
   private fun navigateToMainPage() {
     UI.getCurrent()
-      .navigate(AssociacaoGtinView::class.java)
+      .navigate(AssociacaoGtinView.ROUTE)
   }
 
   override fun beforeEnter(event: BeforeEnterEvent) {
     if(model.loginOk) {
-      UI.getCurrent()
-        .page.history.replaceState(null, "")
-      event.rerouteTo(AssociacaoGtinView::class.java)
+      //UI.getCurrent()
+      // .page.history.replaceState(null, "")
+      navigateToMainPage()
     }
   }
 }
