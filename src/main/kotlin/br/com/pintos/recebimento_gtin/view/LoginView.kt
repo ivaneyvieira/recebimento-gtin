@@ -10,6 +10,7 @@ import com.vaadin.flow.router.BeforeEnterObserver
 import com.vaadin.flow.router.Route
 
 @Route("login")
+@
 class LoginView: VerticalLayout(), BeforeEnterObserver {
   val model = LoginViewModel()
   private val login = LoginOverlay()
