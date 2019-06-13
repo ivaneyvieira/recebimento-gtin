@@ -64,18 +64,18 @@ class ServiceListener: ServletContextListener {
   }
 
   override fun contextInitialized(sce: ServletContextEvent?) {
-    log.info("Initializing Database")
+   // log.info("Initializing Database")
     configDB()
   }
 
   override fun contextDestroyed(sce: ServletContextEvent?) {
-    log.info("Shutting down")
-    log.info("Destroying VaadinOnKotlin")
+    //log.info("Shutting down")
+   // log.info("Destroying VaadinOnKotlin")
     //VaadinOnKotlin.destroy()
-    log.info("Shutdown complete")
+    //log.info("Shutdown complete")
   }
 
   companion object {
-    private val log = LoggerFactory.getLogger(Bootstrap::class.java)
+    //private val log = LoggerFactory.getLogger(Bootstrap::class.java)
   }
 }

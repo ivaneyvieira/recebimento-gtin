@@ -18,6 +18,7 @@ class LoginView: VerticalLayout(), BeforeEnterObserver {
 
   val model: LoginViewModel = UI.getCurrent()
     .create {LoginViewModel()}
+  //lateinit var model: LoginViewModel
   private val login = LoginOverlay()
 
   init {

@@ -9,6 +9,8 @@ plugins {
   id("org.gretty") version "2.3.1"
   war
   id("com.devsoap.vaadin-flow") version "1.1.2"
+ // id("org.springframework.boot") version "2.1.5.RELEASE" 
+ // id("io.spring.dependency-management") version "1.0.6.RELEASE"
 }
 
 vaadin {
@@ -40,7 +42,7 @@ val staging by configurations.creating
 
 dependencies {
   compile(enforcedPlatform("com.vaadin:vaadin-bom:$vaadin10_version"))
-  compile("com.vaadin:vaadin-spring:$vaadin10_version")
+  //compile("com.vaadin:vaadin-spring:$vaadin10_version")
   // Karibu-DSL dependency, includes Vaadin
   compile("com.github.mvysny.karibudsl:karibu-dsl-v10:$karibudsl_version")
   providedCompile("javax.servlet:javax.servlet-api:3.1.0")
@@ -68,7 +70,8 @@ dependencies {
 
   compile("com.github.appreciated:card:0.9.4")
   compile("org.claspina:confirm-dialog:1.0.0")
-  compile("org.springframework.boot:spring-boot-starter-web:2.1.5.RELEASE")
+ // implementation("org.springframework.boot:spring-boot-starter-web")
+ // providedRuntime("org.springframework.boot:spring-boot-starter-tomcat")
 }
 
 tasks.withType<KotlinCompile> {
