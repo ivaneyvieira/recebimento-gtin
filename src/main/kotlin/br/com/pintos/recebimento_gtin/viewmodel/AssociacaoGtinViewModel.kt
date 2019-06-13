@@ -91,6 +91,7 @@ class AssociacaoGtinViewModel(val view: IView) {
       produto.save()
       update(true)
     }
+    Thread.sleep(200)
   }
 }
 

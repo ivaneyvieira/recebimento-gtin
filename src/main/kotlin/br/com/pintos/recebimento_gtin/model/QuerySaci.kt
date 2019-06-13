@@ -33,7 +33,7 @@ class QuerySaci: QueryDB(driver, url, username, password) {
     query(sql) {q ->
       q.addParameter("prdno", codigo.lpad(16, " "))
         .addParameter("grade", grade)
-        .addParameter("gtin", gtin)
+        .addParameter("gtin", gtin.lpad(16, " "))
         .executeUpdate()
     }
   }
@@ -41,8 +41,10 @@ class QuerySaci: QueryDB(driver, url, username, password) {
   fun gtinJaCadastrado(codigo: String, grade: String, gtin: String): Boolean {
     val sql = "/sql/gtinJaCadastrado.sql"
     return query(sql) {q ->
-      q.addParameter("prdno", codigo.lpad(16, " ")).addParameter("grade", grade).addParameter("gtin",
-                                                                                              gtin).executeScalar(Int::class.java) > 0
+      q.addParameter("prdno", codigo.lpad(16, " "))
+        .addParameter("grade", grade)
+        .addParameter("gtin", gtin.lpad(16, " "))
+        .executeScalar(Int::class.java) > 0
     }
   }
 

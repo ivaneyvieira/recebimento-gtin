@@ -21,6 +21,9 @@ import com.vaadin.flow.component.UI
 import com.vaadin.flow.component.grid.Grid
 import com.vaadin.flow.component.grid.GridVariant.LUMO_COLUMN_BORDERS
 import com.vaadin.flow.component.grid.GridVariant.LUMO_COMPACT
+import com.vaadin.flow.component.notification.Notification
+import com.vaadin.flow.component.notification.Notification.Position.BOTTOM_CENTER
+import com.vaadin.flow.component.notification.Notification.Position.MIDDLE
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout
 import com.vaadin.flow.component.orderedlayout.VerticalLayout
 import com.vaadin.flow.component.textfield.TextField
@@ -202,16 +205,10 @@ class AssociacaoGtinView: IView, VerticalLayout() {
   }
 
   override fun showErro(msg: String) {
-    ConfirmDialog.createError()
-      .withCaption("Erro")
-      .withMessage(msg)
-      .open()
+    Notification.show(msg, 1000, MIDDLE)
   }
 
   override fun showAviso(msg: String) {
-    ConfirmDialog.createWarning()
-      .withCaption("Aviso")
-      .withMessage(msg)
-      .open()
+    Notification.show(msg, 1000, MIDDLE)
   }
 }

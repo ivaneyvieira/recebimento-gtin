@@ -2,7 +2,6 @@ package br.com.pintos.framework.model
 
 import br.com.pintos.framework.utils.SystemUtils
 import com.jolbox.bonecp.BoneCPDataSource
-import org.sql2o.Connection
 import org.sql2o.Query
 import org.sql2o.Sql2o
 
@@ -32,9 +31,13 @@ open class QueryDB(private val driver: String, val url: String, val username: St
   }
 
   protected fun <T> query(file: String, lambda: (Query) -> T): T {
-    return buildQuery(file) {con, query ->
-      val ret = lambda(query)
-      con.close()
+    return buildQuery(file) {query ->
+      val queryUpdate = query.dropLast(1)
+      queryUpdate.forEach {update ->
+        lambda(update)
+      }
+      val querySelect = query.last()
+      val ret = lambda(querySelect)
       ret
     }
   }
@@ -45,39 +48,18 @@ open class QueryDB(private val driver: String, val url: String, val username: St
     }
   }
 
-  protected fun execute(file: String,
-                        vararg params: Pair<String, String>,
-                        monitor: (String, Int, Int) -> Unit = {_, _, _ ->}) {
-    var sqlScript = SystemUtils.readFile(file)
-    sql2o.beginTransaction()
+  private fun <T> buildQuery(file: String, proc: (List<Query>) -> T): T {
+    val sqls = SystemUtils.readFile(file)
+      ?.split(";")
+      .orEmpty()
+      .map {it.trim()}
+      .filter {it.isNotBlank()}
+    this.sql2o.beginTransaction()
       .trywr {con ->
-        params.forEach {
-          sqlScript = sqlScript?.replace(":${it.first}", it.second)
-        }
-        val sqls = sqlScript?.split(";")
-          .orEmpty()
-        val count = sqls.size
-        sqls.filter {it.trim() != ""}
-          .forEachIndexed {index, sql ->
-            println(sql)
-            val query = con.createQuery(sql)
-            query.executeUpdate()
-            val parte = index + 1
-            val caption = "Parte $parte/$count"
-            monitor(caption, parte, count)
-          }
-        monitor("", count, count)
+        val query = sqls.map {sql -> con.createQuery(sql)}
+        val ret = proc(query)
         con.commit()
-      }
-  }
-
-  private fun <T> buildQuery(file: String, proc: (Connection, Query) -> T): T {
-    val sql = SystemUtils.readFile(file)
-    this.sql2o.open()
-      .trywr {con ->
-        val query = con.createQuery(sql)
-        println("SQL2O ==> $sql")
-        return proc(con, query)
+        return ret
       }
   }
 }
