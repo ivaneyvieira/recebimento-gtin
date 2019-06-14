@@ -10,6 +10,7 @@ import com.github.mvysny.karibudsl.v10.KeyShortcut
 import com.github.mvysny.karibudsl.v10.VaadinDsl
 import com.github.mvysny.karibudsl.v10.addColumnFor
 import com.github.mvysny.karibudsl.v10.addShortcut
+import com.github.mvysny.karibudsl.v10.getAll
 import com.github.mvysny.karibudsl.v10.grid
 import com.github.mvysny.karibudsl.v10.horizontalLayout
 import com.github.mvysny.karibudsl.v10.isExpand
@@ -22,7 +23,6 @@ import com.vaadin.flow.component.grid.Grid
 import com.vaadin.flow.component.grid.GridVariant.LUMO_COLUMN_BORDERS
 import com.vaadin.flow.component.grid.GridVariant.LUMO_COMPACT
 import com.vaadin.flow.component.notification.Notification
-import com.vaadin.flow.component.notification.Notification.Position.BOTTOM_CENTER
 import com.vaadin.flow.component.notification.Notification.Position.MIDDLE
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout
 import com.vaadin.flow.component.orderedlayout.VerticalLayout
@@ -31,7 +31,6 @@ import com.vaadin.flow.component.textfield.TextFieldVariant.LUMO_SMALL
 import com.vaadin.flow.data.binder.Binder
 import com.vaadin.flow.data.value.ValueChangeMode
 import com.vaadin.flow.router.Route
-import org.claspina.confirmdialog.ConfirmDialog
 
 @Route(ROUTE, layout = MainView::class)
 class AssociacaoGtinView: IView, VerticalLayout() {
@@ -98,6 +97,16 @@ class AssociacaoGtinView: IView, VerticalLayout() {
         isAutoselect = true
         isAutofocus = true
       }
+      this.addShortcut(KeyShortcut(Key.ENTER)) {
+        val item = this.selectedItems.firstOrNull() ?: this.dataProvider.getAll().firstOrNull()
+        if(item != null) {
+          val row =  this.dataProvider.getAll().indexOf(item)
+         // UI.getCurrent().getPage().executeJavaScript("$0._scrollToIndex($1)", this, row)
+          this.select(item)
+          this.editor.editItem(item)
+          field.fieldFocus()
+        }
+      }
       field.addKeyDownListener {eKey ->
         when {
           eKey.key.matches(Key.ENTER.keys[0])      -> {
@@ -152,13 +161,13 @@ class AssociacaoGtinView: IView, VerticalLayout() {
         val produto = eSel.allSelectedItems.firstOrNull()
         produto?.let {
           this.editor.editItem(produto)
-          field.focus()
+          field.fieldFocus()
         }
       }
       binder.bind(field, Produto::gtin.name)
       this.addItemClickListener {e ->
         this.editor.editItem(e.item)
-        field.focus()
+        field.fieldFocus()
       }
 
       binder.addValueChangeListener {e ->
@@ -167,7 +176,7 @@ class AssociacaoGtinView: IView, VerticalLayout() {
           if(!sucesso) {
             produto.gtin = ""
             this.editor.editItem(produto)
-            field.focus()
+            field.fieldFocus()
           }
         }
       }
@@ -179,9 +188,13 @@ class AssociacaoGtinView: IView, VerticalLayout() {
       if(this.editor.isOpen) this.editor.closeEditor()
       this.editor.editItem(produto)
       this.select(produto)
-      Thread.sleep(100)
-      field.focus()
+      field.fieldFocus()
     }
+  }
+
+  private fun TextField.fieldFocus() {
+    Thread.sleep(100)
+    this.focus()
   }
 
   fun update(sucesso: Boolean) {
@@ -200,7 +213,7 @@ class AssociacaoGtinView: IView, VerticalLayout() {
     else {
       dadosNota.isVisible = false
       gridProdutos.setItems(emptyList())
-      edtChave.focus()
+      edtChave.fieldFocus()
     }
   }
 
