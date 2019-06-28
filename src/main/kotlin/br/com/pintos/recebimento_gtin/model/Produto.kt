@@ -12,8 +12,14 @@ class Produto(val codigo: String,
     return "$codigo $grade"
   }
 
+  companion object {
+    fun save(codigo: String, grade: String, gtin: String) {
+      saci.salvaProduto(codigo, grade, gtin)
+    }
+  }
+
   fun save() {
-    saci.salvaProduto(codigo, grade, gtin)
+    save(codigo, grade, gtin)
   }
 
   fun digitoValido(): Boolean {

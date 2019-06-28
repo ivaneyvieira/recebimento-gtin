@@ -22,8 +22,12 @@ class AssociacaoGtinViewModel(val view: IView) {
     view.showAviso(msg)
   }
 
+  fun findNotaEntrada(nfeKey: String): NotaEntrada? {
+    return NotaEntrada.findNotaEntrada(nfeKey)
+  }
+
   fun localizaNfeKey(update: (Boolean) -> Unit) {
-    val notaEntrada = NotaEntrada.findNotaEntrada(nfeKey)
+    val notaEntrada = findNotaEntrada(nfeKey)
     if(notaEntrada == null) {
       showErro("Nota não encontrada")
       update(false)
@@ -66,6 +70,20 @@ class AssociacaoGtinViewModel(val view: IView) {
     else null
   }
 
+  fun saveProduto(key: String, prdno: String, grade: String, gtin: String) {
+    val nota = NotaEntrada.findNotaEntrada(key)
+    if(nota == null)
+      showErro("Produto inválido")
+    else {
+      val produto = nota.produtos.filter {
+        it.codigo == prdno && it.grade == grade
+      }
+        .firstOrNull()
+      produto?.gtin = gtin
+      saveProduto(produto) { }
+    }
+  }
+
   fun saveProduto(produto: Produto?, update: (Boolean) -> Unit) {
     if(produto == null) {
       showErro("Produto inválido")
@@ -79,12 +97,12 @@ class AssociacaoGtinViewModel(val view: IView) {
       showErro("Produto não tem grade")
       update(false)
     }
-//    else if(!produto.digitoValido()) {
-//      showErro("Código GTIN inválido")
-//      update(false)
-//    }
+    //    else if(!produto.digitoValido()) {
+    //      showErro("Código GTIN inválido")
+    //      update(false)
+    //    }
     else if(produto.gtinJaCadastrado()) {
-      showErro("Código GTIN Já está cadastrado em outro produto")
+      showErro("Código GTIN já está cadastrado em outro produto")
       update(false)
     }
     else {
