@@ -13,8 +13,6 @@ import com.vaadin.flow.component.page.Viewport
 import com.vaadin.flow.router.PageTitle
 import com.vaadin.flow.theme.Theme
 import com.vaadin.flow.theme.lumo.Lumo
-import jdk.nashorn.internal.runtime.linker.Bootstrap
-import org.slf4j.LoggerFactory
 import javax.servlet.ServletContextEvent
 import javax.servlet.ServletContextListener
 import javax.servlet.annotation.WebListener
