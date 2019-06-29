@@ -35,13 +35,13 @@ class GtinControler: IView {
   }
 
   @GetMapping("/save/{key}/{prdno}/{grade}/{gtin}")
-  fun saveProduto(@PathVariable
+  fun saveProduto(@PathVariable("key")
                   key: String,
-                  @PathVariable
+                  @PathVariable("prdno")
                   prdno: String,
-                  @PathVariable
+                  @PathVariable("grade")
                   grade: String,
-                  @PathVariable
+                  @PathVariable("gtin")
                   gtin: String)
     : Messagem {
     viewModel.saveProduto(key, prdno, grade, gtin)

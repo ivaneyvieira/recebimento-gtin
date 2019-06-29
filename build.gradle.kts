@@ -9,9 +9,9 @@ plugins {
   id("org.gretty") version "2.3.1"
   war
   id("com.devsoap.vaadin-flow") version "1.1.2"
-  id("org.springframework.boot") version "2.1.5.RELEASE"
-  id("io.spring.dependency-management") version "1.0.6.RELEASE"
-  id("org.jetbrains.kotlin.plugin.spring") version "1.3.40"
+  //id("org.springframework.boot") version "2.1.5.RELEASE"
+  //id("io.spring.dependency-management") version "1.0.6.RELEASE"
+  //id("org.jetbrains.kotlin.plugin.spring") version "1.3.40"
 }
 
 vaadin {
@@ -71,7 +71,7 @@ dependencies {
 
   compile("com.github.appreciated:card:0.9.4")
   compile("org.claspina:confirm-dialog:1.0.0")
-  implementation("org.springframework.boot:spring-boot-starter-web")
+  //implementation("org.springframework.boot:spring-boot-starter-web")
   //providedRuntime("org.springframework.boot:spring-boot-starter-tomcat")
 }
 

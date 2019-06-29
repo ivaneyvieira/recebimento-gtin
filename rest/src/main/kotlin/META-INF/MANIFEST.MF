@@ -1,0 +1,73 @@
+Manifest-Version: 1.0
+Class-Path: jersey-client-2.27.jar gwt-elemental-2.8.2.vaadin2.jar flo
+ w-server-1.4.3.jar vaadin-control-state-mixin-2.1.3.jar vaadin-icons-
+ flow-1.3.1.jar iron-flex-layout-2.0.3.jar javax.inject-2.5.0-b42.jar 
+ commons-codec-1.11.jar httpcore-4.4.11.jar vaadin-details-1.0.1.jar j
+ ersey-media-multipart-2.27.jar vaadin-icons-4.2.2.jar vaadin-lumo-the
+ me-1.4.3.jar vaadin-context-menu-4.3.4.jar vaadin-grid-flow-3.0.3.jar
+  javax.annotation-api-1.3.2.jar javax.el-3.0.0.jar iron-list-2.0.19.j
+ ar vaadin-combo-box-4.2.9.jar iron-meta-2.1.1.jar spring-boot-starter
+ -web-2.1.5.RELEASE.jar vaadin-checkbox-flow-1.3.2.jar spring-boot-2.1
+ .5.RELEASE.jar vaadin-ordered-layout-1.1.0.jar spring-beans-5.1.7.REL
+ EASE.jar polymer-2.7.0.jar logback-classic-1.2.3.jar spring-boot-star
+ ter-tomcat-2.1.5.RELEASE.jar iron-scroll-target-behavior-2.1.1.jar ja
+ ckson-module-parameter-names-2.9.8.jar vaadin-notification-flow-1.3.0
+ .jar vaadin-upload-4.2.1.jar annotations-12.0.jar spring-boot-starter
+ -json-2.1.5.RELEASE.jar vaadin-login-1.0.0.jar paper-ripple-1.0.jar c
+ onfirm-dialog-1.0.0.jar vaadin-app-layout-flow-1.1.1.jar vaadin-login
+ -flow-1.0.0.jar bonecp-0.8.0.RELEASE.jar simple-xml-2.7.1.jar vaadin-
+ material-styles-1.2.2.jar hk2-api-2.5.0-b42.jar spring-expression-5.1
+ .7.RELEASE.jar iron-iconset-svg-2.2.1.jar byte-buddy-1.9.12.jar tomca
+ t-embed-websocket-9.0.19.jar jackson-databind-2.9.8.jar mimepull-1.9.
+ 11.jar vaadin-grid-5.3.3.jar logback-core-1.2.3.jar atmosphere-runtim
+ e-2.4.30.vaadin1.jar vaadin-context-menu-flow-2.0.1.jar vaadin-materi
+ al-theme-1.4.3.jar vaadin-app-layout-1.0.2.jar vaadin-ordered-layout-
+ flow-1.3.0.jar vaadin-development-mode-detector-2.0.0.jar jackson-ann
+ otations-2.9.0.jar vaadin-radio-button-flow-1.3.1.jar vaadin-item-2.1
+ .0.jar kotlin-stdlib-1.3.40.jar spring-boot-starter-logging-2.1.5.REL
+ EASE.jar iron-resizable-behavior-2.1.1.jar vaadin-tabs-2.1.2.jar vaad
+ in-tabs-flow-1.3.0.jar log4j-to-slf4j-2.11.2.jar vaadin-time-picker-1
+ .2.2.jar vaadin-checkbox-2.2.7.jar spring-context-5.1.7.RELEASE.jar v
+ aadin-progress-bar-1.1.0.jar vaadin-button-2.1.5.jar vaadin-list-box-
+ 1.1.0.jar annotations-13.0.jar vaadin-dialog-2.2.1.jar jboss-logging-
+ 3.3.2.Final.jar tomcat-embed-core-9.0.19.jar vaadin-iron-list-flow-1.
+ 3.0.jar iron-icon-2.1.0.jar vaadin-time-picker-flow-1.1.2.jar vaadin-
+ radio-button-1.1.5.jar vaadin-accordion-1.0.0.jar vaadin-slf4j-jdk14-
+ 1.6.1.jar javax.servlet-api-4.0.1.jar vaadin-split-layout-4.1.0.jar j
+ ul-to-slf4j-1.7.26.jar stax-api-1.0.1.jar sql2o-1.5.4.jar iron-overla
+ y-behavior-2.3.4.jar vaadin-dialog-flow-1.3.0.jar javassist-3.22.0-CR
+ 2.jar vaadin-custom-field-flow-2.0.2.jar validation-api-2.0.1.Final.j
+ ar cups4j-0.7.1.jar vaadin-accordion-flow-1.0.3.jar webcomponentsjs-1
+ .2.6.jar spring-aop-5.1.7.RELEASE.jar slf4j-api-1.7.26.jar vaadin-ove
+ rlay-3.2.11.jar vaadin-text-field-flow-1.3.0.jar paper-ripple-2.1.1.j
+ ar shadycss-1.8.0.jar vaadin-form-layout-flow-1.3.1.jar javax.ws.rs-a
+ pi-2.1.jar spring-jcl-5.1.7.RELEASE.jar iron-fit-behavior-2.2.1.jar k
+ aribu-dsl-v10-0.6.3.jar flow-html-components-1.4.3.jar vaadin-split-l
+ ayout-flow-1.3.1.jar flow-client-1.4.3.jar iron-a11y-announcer-2.1.0.
+ jar osgi-resource-locator-1.0.1.jar vaadin-select-2.0.4.jar vaadin-up
+ load-flow-1.3.0.jar vaadin-text-field-2.3.7.jar log4j-api-2.11.2.jar 
+ spring-web-5.1.7.RELEASE.jar vaadin-lumo-styles-1.4.2.jar vaadin-butt
+ on-flow-1.3.2.jar vaadin-core-13.0.5.jar vaadin-custom-field-1.0.1.ja
+ r card-0.9.4.jar classmate-1.4.0.jar vaadin-list-box-flow-1.3.0.jar x
+ pp3-1.1.3.3.jar vaadin-details-flow-1.0.1.jar vaadin-progress-bar-flo
+ w-1.3.0.jar stax-1.2.0.jar flow-data-1.4.3.jar imgscalr-lib-4.2.jar p
+ h-commons-9.1.2.jar hk2-utils-2.5.0-b42.jar vaadin-list-mixin-2.1.2.j
+ ar ph-css-6.1.1.jar aopalliance-repackaged-2.5.0-b42.jar httpclient-4
+ .5.8.jar vaadin-combo-box-flow-2.1.3.jar iron-media-query-2.1.0.jar k
+ otlin-stdlib-jdk8-1.3.40.jar snakeyaml-1.23.jar jersey-common-2.27.ja
+ r tomcat-embed-el-9.0.19.jar spring-boot-autoconfigure-2.1.5.RELEASE.
+ jar kotlin-stdlib-jdk7-1.3.40.jar jackson-core-2.9.8.jar jsr305-3.0.2
+ .jar hk2-locator-2.5.0-b42.jar gentyref-1.2.0.vaadin1.jar javax.webso
+ cket-api-1.1.jar vaadin-date-picker-flow-1.3.0.jar vaadin-form-layout
+ -2.1.2.jar commons-lang3-3.8.1.jar commons-io-2.5.jar vaadin-notifica
+ tion-1.2.1.jar flow-push-1.4.3.jar hibernate-validator-6.0.16.Final.j
+ ar vaadin-themable-mixin-1.4.4.jar vaadin-usage-statistics-2.0.3.jar 
+ spring-webmvc-5.1.7.RELEASE.jar spring-boot-starter-2.1.5.RELEASE.jar
+  mysql-connector-java-5.1.47.jar guava-15.0.jar javax.inject-1.jar ja
+ ckson-datatype-jsr310-2.9.8.jar jersey-hk2-2.27.jar jsoup-1.11.2.jar 
+ vaadin-select-flow-1.0.0.jar iron-a11y-keys-behavior-2.1.1.jar common
+ s-fileupload-1.3.3.jar kotlin-stdlib-common-1.3.40.jar spring-core-5.
+ 1.7.RELEASE.jar vaadin-element-mixin-2.1.3.jar jackson-datatype-jdk8-
+ 2.9.8.jar vaadin-date-picker-3.3.4.jar
+Main-Class: rest.ApplicationKt
+
