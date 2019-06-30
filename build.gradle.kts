@@ -8,14 +8,14 @@ plugins {
   kotlin("jvm") version "1.3.40"
   id("org.gretty") version "2.3.1"
   war
-  id("com.devsoap.vaadin-flow") version "1.1.2"
+  id("com.devsoap.vaadin-flow") version "1.2"
   //id("org.springframework.boot") version "2.1.5.RELEASE"
   //id("io.spring.dependency-management") version "1.0.6.RELEASE"
   //id("org.jetbrains.kotlin.plugin.spring") version "1.3.40"
 }
 
 vaadin {
-  version = "13.0.5"
+  version = "13.0.9"
   this.setUnsupportedVersion(true)
 }
 
