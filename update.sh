@@ -2,3 +2,4 @@
 
 git pull
 gradle clean build
+gradle clean build -p rest

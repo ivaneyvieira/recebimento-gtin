@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
+import java.time.LocalDateTime
 
 @RestController
 class GtinControler: IView {
@@ -49,7 +50,7 @@ class GtinControler: IView {
   }
 }
 
-data class Messagem(var erro: String = "", var aviso: String = "") {
+data class Messagem(var erro: String = "", var aviso: String = "", val data : LocalDateTime = LocalDateTime.now()) {
   fun clean() {
     erro = ""
     aviso = ""
