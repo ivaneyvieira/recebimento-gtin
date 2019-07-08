@@ -23,7 +23,7 @@ services:
     volumes:
       - ./ebean.properties:/etc/ebean.properties
       - ./rest/build/libs/rest.jar:/rest.jar
-      - ./rest/src/main/resources/sql:/sql
+      - ./src/main/resources/sql:/sql
     restart: always
     command: java -jar /rest.jar
 

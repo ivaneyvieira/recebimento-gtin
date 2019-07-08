@@ -97,10 +97,10 @@ class AssociacaoGtinViewModel(val view: IView) {
       showErro("Produto não tem grade")
       update(false)
     }
-    //    else if(!produto.digitoValido()) {
-    //      showErro("Código GTIN inválido")
-    //      update(false)
-    //    }
+    else if(!produto.digitoValido()) {
+      showErro("Código GTIN inválido")
+      update(false)
+    }
     else if(produto.gtinJaCadastrado()) {
       showErro("Código GTIN já está cadastrado em outro produto")
       update(false)

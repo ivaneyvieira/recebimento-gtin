@@ -93,7 +93,6 @@ object SystemUtils {
     val file = File(resource.file)
     val path = if(file.exists()) {
       val uri = resource.toURI()
-
       Paths.get(uri)
     }
     else

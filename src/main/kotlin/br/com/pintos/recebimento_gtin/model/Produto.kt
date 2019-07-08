@@ -23,7 +23,7 @@ class Produto(val codigo: String,
   }
 
   fun digitoValido(): Boolean {
-    return gtin.isValidBarCodeEAN() || gtin == ""
+    return gtin.length == 13 || gtin == ""
   }
 
   fun temGrade(): Boolean {
