@@ -6,6 +6,7 @@ import org.imgscalr.Scalr.Mode
 import java.awt.image.BufferedImage
 import java.io.ByteArrayInputStream
 import java.io.ByteArrayOutputStream
+import java.io.File
 import java.io.IOException
 import java.io.InputStream
 import java.lang.Exception
@@ -89,9 +90,14 @@ object SystemUtils {
   @Throws(IOException::class)
   fun readFile(filename: String, encoding: Charset): String {
     val resource = SystemUtils::class.java.getResource(filename)
-    val uri = resource.toURI()
-    val path = if(uri == null) Paths.get(filename)
-    else Paths.get(uri)
+    val file = File(resource.file)
+    val path = if(file.exists()) {
+      val uri = resource.toURI()
+
+      Paths.get(uri)
+    }
+    else
+      Paths.get(filename)
     val encoded = Files.readAllBytes(path)
     return String(encoded, encoding)
   }
