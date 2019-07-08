@@ -8,6 +8,7 @@ import java.io.ByteArrayInputStream
 import java.io.ByteArrayOutputStream
 import java.io.IOException
 import java.io.InputStream
+import java.lang.Exception
 import java.nio.charset.Charset
 import java.nio.file.Files
 import java.nio.file.Paths
@@ -88,6 +89,7 @@ object SystemUtils {
   @Throws(IOException::class)
   fun readFile(filename: String, encoding: Charset): String {
     val resource = SystemUtils::class.java.getResource(filename)
+                   ?: throw Exception("Arquivo '$filename' não foi encontrado!!!")
     val path = Paths.get(resource.toURI())
     val encoded = Files.readAllBytes(path)
     return String(encoded, encoding)
