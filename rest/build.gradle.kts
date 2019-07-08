@@ -17,7 +17,7 @@ springBoot {
 
 
 dependencies {
-  implementation(project(":"))
+  compile(project(":"))
   compile(kotlin("stdlib-jdk8"))
   compile("mysql:mysql-connector-java:5.1.47")
   implementation("org.springframework.boot:spring-boot-starter-web")
