@@ -89,8 +89,9 @@ object SystemUtils {
   @Throws(IOException::class)
   fun readFile(filename: String, encoding: Charset): String {
     val resource = SystemUtils::class.java.getResource(filename)
-    val uri = resource.toURI() ?: throw Exception("Arquivo '$filename' não foi encontrado!!!")
-    val path = Paths.get(uri)
+    val uri = resource.toURI()
+    val path = if(uri == null) Paths.get(filename)
+    else Paths.get(uri)
     val encoded = Files.readAllBytes(path)
     return String(encoded, encoding)
   }
