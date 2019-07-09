@@ -1,7 +1,5 @@
 package br.com.pintos.recebimento_gtin.model
 
-import br.com.pintos.framework.utils.isValidBarCodeEAN
-
 class Produto(val codigo: String,
               val descricao: String,
               val quant: Int,

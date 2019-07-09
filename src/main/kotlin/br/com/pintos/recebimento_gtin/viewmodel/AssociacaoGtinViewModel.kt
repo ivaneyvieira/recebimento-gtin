@@ -75,10 +75,9 @@ class AssociacaoGtinViewModel(val view: IView) {
     if(nota == null)
       showErro("Produto inválido")
     else {
-      val produto = nota.produtos.filter {
+      val produto = nota.produtos.firstOrNull {
         it.codigo == prdno && it.grade == grade
       }
-        .firstOrNull()
       produto?.gtin = gtin
       saveProduto(produto) { }
     }

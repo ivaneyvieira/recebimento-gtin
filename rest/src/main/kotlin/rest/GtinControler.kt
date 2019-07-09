@@ -42,10 +42,10 @@ class GtinControler: IView {
                   prdno: String,
                   @PathVariable("grade")
                   grade: String,
-                  @PathVariable("gtin")
-                  gtin: String)
+                  @PathVariable("gtin", required = false)
+                  gtin: String?)
     : Messagem {
-    viewModel.saveProduto(key, prdno, grade, gtin)
+    viewModel.saveProduto(key, prdno, grade, gtin ?: "")
     return messagem
   }
 }
