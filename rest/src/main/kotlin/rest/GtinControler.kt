@@ -42,10 +42,11 @@ class GtinControler: IView {
                   prdno: String,
                   @PathVariable("grade")
                   grade: String,
-                  @PathVariable("gtin", required = false)
-                  gtin: String?)
+                  @PathVariable("gtin")
+                  gtin: String)
     : Messagem {
-    viewModel.saveProduto(key, prdno, grade, gtin ?: "")
+    val gtinNull = if(gtin == "NULL")"" else gtin
+    viewModel.saveProduto(key, prdno, grade, gtinNull)
     return messagem
   }
 }

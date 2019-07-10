@@ -4,6 +4,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 val karibudsl_version = "0.6.3"
 val vaadin10_version = "13.0.5"
 
+
 plugins {
   kotlin("jvm") version "1.3.40"
   id("org.gretty") version "2.3.1"
