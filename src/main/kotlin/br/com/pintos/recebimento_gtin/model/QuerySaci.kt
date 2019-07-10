@@ -40,6 +40,7 @@ class QuerySaci: QueryDB(driver, url, username, password) {
 
   fun gtinJaCadastrado(codigo: String, grade: String, gtin: String): Boolean {
     val sql = "/sql/gtinJaCadastrado.sql"
+    println("gtinJaCadastrado('$codigo', '$grade', '$gtin'")
     return query(sql) {q ->
       q.addParameter("prdno", codigo.lpad(16, " "))
         .addParameter("grade", grade)
