@@ -54,6 +54,7 @@ open class QueryDB(private val driver: String, val url: String, val username: St
       .orEmpty()
       .map {it.trim()}
       .filter {it.isNotBlank()}
+    println(sqls.joinToString("\n"))
     this.sql2o.beginTransaction()
       .trywr {con ->
         val query = sqls.map {sql -> con.createQuery(sql)}
