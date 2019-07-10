@@ -45,6 +45,7 @@ class GtinControler: IView {
                   @PathVariable("gtin")
                   gtin: String)
     : Messagem {
+    messagem.clean()
     val gtinNull = if(gtin == "NULL")"" else gtin
     viewModel.saveProduto(key, prdno, grade, gtinNull)
     return messagem
