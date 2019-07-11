@@ -46,26 +46,25 @@ fun String.mid(start: Int): String {
   return mid(start, start + length)
 }
 
-fun String.isValidBarCodeEAN(): Boolean {
-  val checkSum = "131313131313".map {
-    it.toString()
-      .toInt()
-  }
 
-  return if((this.length == 8 || this.length == 13) && this.matches("[0-9]+".toRegex())) {
-    val digit = this[this.length - 1].toString()
-      .toInt()
-    val ean = this.substring(0, this.length - 1)
-      .map {
-        it.toString()
-          .toInt()
-      }
-    val total = ean.zip(checkSum)
-      .fold(0) {sum, (a, b) ->
-        sum + a * b
-      }
-    val calculated = 10 - total % 10
+fun String.isValidBarCodeEAN(): Boolean {
+  val digit: Int
+  val calculated: Int
+  val ean: String
+  val checkSum = "131313131313"
+  var sum = 0
+
+  return if(this.length == 8 || this.length == 13) {
+    digit = Integer.parseInt("" + this[this.length - 1])
+    ean = this.substring(0, this.length - 1)
+    for(i in 0 until ean.length) {
+      sum += Integer.parseInt("" + ean[i]) * Integer.parseInt("" + checkSum[i])
+    }
+    calculated = 10 - sum % 10
     digit == calculated
   }
-  else false
+  else {
+    false
+  }
 }
+

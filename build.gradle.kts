@@ -74,6 +74,11 @@ dependencies {
   compile("org.claspina:confirm-dialog:1.0.0")
   //implementation("org.springframework.boot:spring-boot-starter-web")
   //providedRuntime("org.springframework.boot:spring-boot-starter-tomcat")
+
+  testCompile( "org.jboss.arquillian.junit:arquillian-junit-container:1.4.1.Final")
+  compile("org.jboss.shrinkwrap:shrinkwrap-api:1.2.6")
+  testCompile("org.junit.jupiter:junit-jupiter-api:5.5.0")
+
 }
 
 tasks.withType<KotlinCompile> {
