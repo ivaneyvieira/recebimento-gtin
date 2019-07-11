@@ -47,8 +47,9 @@ class GtinControler: IView {
     : Messagem {
     println("/save/$key/$prdno/$grade/$gtin")
     messagem.clean()
-    val gtinNull = if(gtin == "NULL")"" else gtin
-    viewModel.saveProduto(key, prdno, grade, gtinNull)
+    val gtinNull = if(gtin == "NULL") "" else gtin
+    val gradeResolve = grade.replace("_", "/")
+    viewModel.saveProduto(key, prdno, gradeResolve, gtinNull)
     return messagem
   }
 }
