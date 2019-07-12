@@ -60,7 +60,7 @@ fun String.isValidBarCodeEAN(): Boolean {
     for(i in 0 until ean.length) {
       sum += Integer.parseInt("" + ean[i]) * Integer.parseInt("" + checkSum[i])
     }
-    calculated = 10 - sum % 10
+    calculated = (10 - sum % 10) % 10
     digit == calculated
   }
   else {

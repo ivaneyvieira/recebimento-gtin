@@ -35,8 +35,7 @@ gretty {
 tasks.withType<Test> {
   useJUnitPlatform()
   testLogging {
-    // to see the exceptions of failed tests in Travis-CI console.
-    exceptionFormat = TestExceptionFormat.FULL
+    events("passed", "skipped", "failed")
   }
 }
 val staging by configurations.creating
@@ -75,10 +74,21 @@ dependencies {
   //implementation("org.springframework.boot:spring-boot-starter-web")
   //providedRuntime("org.springframework.boot:spring-boot-starter-tomcat")
 
-  testCompile( "org.jboss.arquillian.junit:arquillian-junit-container:1.4.1.Final")
-  compile("org.jboss.shrinkwrap:shrinkwrap-api:1.2.6")
-  testCompile("org.junit.jupiter:junit-jupiter-api:5.5.0")
 
+  // Kotlin reflection.
+  compile(kotlin("test"))
+  compile(kotlin("test-junit"))
+
+  // JUnit 5
+  testImplementation("org.junit.jupiter:junit-jupiter-api:5.2.0")
+  testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.2.0")
+  testRuntime("org.junit.platform:junit-platform-console:1.2.0")
+
+  // Kotlintest
+  testCompile("io.kotlintest:kotlintest-core:3.1.0-RC2")
+  testCompile("io.kotlintest:kotlintest-assertions:3.1.0-RC2")
+  testCompile("io.kotlintest:kotlintest-runner-junit5:3.1.0-RC2")
+  compile ("com.willowtreeapps.assertk:assertk:0.17")
 }
 
 tasks.withType<KotlinCompile> {
