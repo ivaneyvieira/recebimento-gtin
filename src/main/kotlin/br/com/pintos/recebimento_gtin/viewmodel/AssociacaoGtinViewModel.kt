@@ -70,17 +70,8 @@ class AssociacaoGtinViewModel(val view: IView) {
     else null
   }
 
-  fun saveProduto(key: String, prdno: String, grade: String, gtin: String) {
-    val nota = NotaEntrada.findNotaEntrada(key)
-    if(nota == null)
-      showErro("Produto inválido")
-    else {
-      val produto = nota.produtos.firstOrNull {
-        it.codigo == prdno && it.grade == grade
-      }
-      produto?.gtin = gtin
-      saveProduto(produto) { }
-    }
+  fun saveProduto(produto: Produto?) {
+    saveProduto(produto) { }
   }
 
   fun saveProduto(produto: Produto?, update: (Boolean) -> Unit) {

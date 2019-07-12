@@ -1,10 +1,13 @@
 package rest
 
 import br.com.pintos.recebimento_gtin.model.NotaEntrada
+import br.com.pintos.recebimento_gtin.model.Produto
 import br.com.pintos.recebimento_gtin.viewmodel.AssociacaoGtinViewModel
 import br.com.pintos.recebimento_gtin.viewmodel.IView
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
+import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 import java.time.LocalDateTime
@@ -35,21 +38,10 @@ class GtinControler: IView {
     return viewModel.findNotaEntrada(key)
   }
 
-  @GetMapping("/save/{key}/{prdno}/{grade}/{gtin}")
-  fun saveProduto(@PathVariable("key")
-                  key: String,
-                  @PathVariable("prdno")
-                  prdno: String,
-                  @PathVariable("grade")
-                  grade: String,
-                  @PathVariable("gtin")
-                  gtin: String)
-    : Messagem {
-    println("/save/$key/$prdno/$grade/$gtin")
+  @PostMapping("/saveProduto")
+  fun saveProduto(@RequestBody produto : Produto)    : Messagem {
     messagem.clean()
-    val gtinNull = if(gtin == "NULL") "" else gtin
-    val gradeResolve = grade.replace("_", "/")
-    viewModel.saveProduto(key, prdno, gradeResolve, gtinNull)
+    viewModel.saveProduto(produto)
     return messagem
   }
 }

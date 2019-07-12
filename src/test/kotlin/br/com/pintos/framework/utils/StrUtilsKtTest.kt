@@ -45,7 +45,7 @@ internal class StrUtilsKtTest {
     "790948462263",
     "790941108468050"
                        )
-
+/*
   @Test
   fun isValidBarCodeEANOk() {
     gtinsOk.forEach {gtin ->
@@ -61,5 +61,5 @@ internal class StrUtilsKtTest {
       println("$gtin is $value")
       assertThat(value).isEqualTo(false)
     }
-  }
+  }*/
 }

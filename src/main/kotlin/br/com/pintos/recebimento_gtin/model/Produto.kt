@@ -1,11 +1,11 @@
 package br.com.pintos.recebimento_gtin.model
 
-class Produto(val codigo: String,
-              val descricao: String,
-              val quant: Int,
-              val grade: String,
-              var gtin: String,
-              val temGrade: Int) {
+data class Produto constructor(var codigo: String = "",
+                               var descricao: String = "",
+                               var quant: Int = 0,
+                               var grade: String = "",
+                               var gtin: String = "",
+                               var temGrade: Int = 0) {
   override fun toString(): String {
     return "$codigo $grade"
   }
