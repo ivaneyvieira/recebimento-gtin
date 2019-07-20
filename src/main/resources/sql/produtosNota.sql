@@ -9,4 +9,5 @@ from iprd AS I
     AND B.grade = I.grade
     AND B.bits  = 2
 where I.invno = :invno
+  AND P.dereg & POW(2, 2) = 0
 ORDER BY I.prdno, I.grade
