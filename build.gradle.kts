@@ -53,6 +53,7 @@ dependencies {
   compile("org.slf4j:slf4j-api:1.7.25")
 
   compile(kotlin("stdlib-jdk8"))
+  compile(kotlin("reflect"))
   // test support
   testCompile("com.github.mvysny.kaributesting:karibu-testing-v10:1.1.6")
   testCompile("com.github.mvysny.dynatest:dynatest-engine:0.15")
@@ -78,6 +79,7 @@ dependencies {
   // Kotlin reflection.
   compile(kotlin("test"))
   compile(kotlin("test-junit"))
+
 
   // JUnit 5
   testImplementation("org.junit.jupiter:junit-jupiter-api:5.2.0")
