@@ -1,12 +1,5 @@
 package br.com.pintos.framework.utils
 
-import assertk.assertThat
-import assertk.assertions.isBetween
-import assertk.assertions.isEqualTo
-import assertk.assertions.isTrue
-import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.Assertions.*
-
 internal class StrUtilsKtTest {
   val gtinsOk = listOf(
     "7909408464922",
