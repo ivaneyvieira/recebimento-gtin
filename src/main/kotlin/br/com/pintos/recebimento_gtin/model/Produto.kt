@@ -1,6 +1,7 @@
 package br.com.pintos.recebimento_gtin.model
 
 data class Produto constructor(var codigo: String = "",
+                               var referencia : String = "",
                                var descricao: String = "",
                                var quant: Int = 0,
                                var grade: String = "",

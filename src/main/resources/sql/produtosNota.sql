@@ -1,13 +1,17 @@
-select I.prdno as codigo, TRIM(MID(P.name, 1, 38)) as descricao, I.qtty/1000 as quant,
-  I.grade, IFNULL(TRIM(B.barcode), '') as gtin,
-  MID(grade_l, 1, 10)*1 > 0 OR MID(grade_l, 11, 10)*1 > 0 as temGrade
-from iprd AS I
-  inner join prd AS P
-    on P.no = I.prdno
-  left join prdbar AS B
-    ON  B.prdno = I.prdno
-    AND B.grade = I.grade
-    AND B.bits  = 2
+select O.prdno as codigo,  mfno_ref as referencia, TRIM(MID(P.name, 1, 38)) as descricao,
+       SUM(qtty - qttyCancel - qttyRcv) as quant,
+       O.grade, IFNULL(TRIM(B.barcode), '') as gtin,
+       MID(grade_l, 1, 10)*1 > 0 OR MID(grade_l, 11, 10)*1 > 0 as temGrade
+from inv AS I
+         inner join oprd AS O
+                    USING(storeno, ordno)
+         inner join prd AS P
+                    on P.no = O.prdno
+         left join prdbar AS B
+                   ON  B.prdno = O.prdno
+                       AND B.grade = O.grade
+                       AND LENGTH(TRIM(B.barcode))  = 13
 where I.invno = :invno
-  AND P.dereg & POW(2, 2) = 0
-ORDER BY I.prdno, I.grade
+        AND P.dereg & POW(2, 2) = 0
+GROUP BY O.prdno, O.grade
+ORDER BY O.prdno, O.grade
