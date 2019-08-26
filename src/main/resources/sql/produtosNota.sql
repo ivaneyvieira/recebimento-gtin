@@ -1,12 +1,16 @@
 select O.prdno as codigo,  mfno_ref as referencia, TRIM(MID(P.name, 1, 38)) as descricao,
-       SUM(O.qtty - qttyCancel - qttyRcv) as quant,
+       0 as quant,
        O.grade, IFNULL(TRIM(B.barcode), '') as gtin,
        MID(grade_l, 1, 10)*1 > 0 OR MID(grade_l, 11, 10)*1 > 0 as temGrade
 from inv AS I
+         inner join ords AS OD
+                    ON OD.storeno = I.storeno
+                        AND OD.invno = I.l4
          inner join oprd AS O
-                    USING(storeno, ordno)
+                    ON OD.no = O.ordno
+                        AND OD.storeno = O.storeno
          inner join iprd2 AS I2
-                    ON I2.invno = I.l4
+                    ON I2.invno = OD.invno
                         AND I2.prdno = O.prdno
          inner join prd AS P
                     on P.no = O.prdno
