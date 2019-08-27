@@ -21,7 +21,6 @@ from inv AS I
 where I.invno = :invno
         AND P.dereg & POW(2, 2) = 0
 GROUP BY O.prdno, O.grade
-ORDER BY O.prdno, O.grade
 UNION DISTINCT
 select O.prdno as codigo,  mfno_ref as referencia, TRIM(MID(P.name, 1, 38)) as descricao,
        0 as quant,
@@ -42,4 +41,4 @@ from inv AS I
 where I.invno = :invno
         AND P.dereg & POW(2, 2) = 0
 GROUP BY O.prdno, O.grade
-ORDER BY O.prdno, O.grade
+ORDER BY 1, 5
